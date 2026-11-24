@@ -91,6 +91,23 @@ def _entry(token: str) -> dict[str, Any]:
 def _fetches(token: str) -> dict[str, Any]:
     return {
         **DEFAULT_FETCHES,
+        # A non-empty catalogue: the empty one raises an error toast that would
+        # replace the message these tests read.
+        "/api/settings/tools": {
+            "status": 200,
+            "json": {
+                "tools": [
+                    {
+                        "name": "ha_get_state",
+                        "title": "Get state",
+                        "description": "Read an entity's state.",
+                        "primary_tag": "Search",
+                        "category": "read",
+                    }
+                ],
+                "states": {},
+            },
+        },
         "/api/settings/features": {
             "status": 200,
             "json": {"flags": {"enable_tool_security_policies": {"value": True}}},
